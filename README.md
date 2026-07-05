@@ -125,27 +125,20 @@ There is a few steps:
     - Keystore alias, password and path of the keystore file (where you intend to make it), in format shown above.
     - By default the script puts the keystore in the project directory
     - Your paths to ndk, sdk and keytool
-2) Run setup_local.sh
+2) run assemble_fdroid.sh
     - Puts your keystore variable in `.gradle/gradle.properties`
-    - Puts user paths into `local.properties`
+    - Puts user paths into `local.env`
+    - Updates sdk path in `local.properties`
     - Makes a keystore in the project directory
-3) Run prebuild_fdroid.sh
     - Prebuild steps from the gitlab procedure for LibreraReader.
         - Removes libdeps of free and pro, and removes mentions from gradle
         - Replaces sdk paths with yours (double check PATH1 and PATH2)
         - Premakes the jni folder
-4)  Run link_to_mupdf_x.x.x.sh
     - Git clone the mupdf repo and link it to app
-5) Assemble with gradle.
-    - Sync gradle with android studio if the app doesn't show in android studio.
+    - Assembles with gradle
+        - Sync gradle with android studio if the app doesn't show in android studio.
 ~~~~
-./setup_local.sh
-cd app
-./prebuild_fdroid.sh 
-cd Builder
-./link_to_mupdf_x.x.x.sh
-cd ..
-./gradlew assembleFdroid
+./assemble_fdroid.sh
 ~~~~
 
 F-Droid build does also not need a **google-services.json**
