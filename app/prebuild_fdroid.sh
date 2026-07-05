@@ -1,4 +1,5 @@
 export MUPDF_VERSION=1.23.7
+source ../local.env
 sed -i -e '/libDepFree/d' -e '/libDepPro/d' -e '/foojay/d' ../settings.gradle.kts
 sed -i -e '/enable = true/d' -e '/_appGdriveKey/d' -e '/_admob/d' -e '/googleServices/d' -e '/dep_/d' -e '/libDepFree/d' -e '/libDepPro/d' build.gradle
 mkdir src/main/jniLibs

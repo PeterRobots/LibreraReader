@@ -140,7 +140,6 @@ There is a few steps:
     - Sync gradle with android studio if the app doesn't show in android studio.
 ~~~~
 ./setup_local.sh
-source local.properties
 cd app
 ./prebuild_fdroid.sh 
 cd Builder

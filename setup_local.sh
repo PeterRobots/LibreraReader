@@ -5,7 +5,12 @@ USER_KEYTOOL_PATH=~/.local/share/JetBrains/Toolbox/apps/android-studio/jbr/bin/k
 
 # transfer local.properties
 sed -i -E "s#(sdk.dir=).*#\1${USER_SDK_PATH}#g" local.properties
-echo USER_NDK_PATH=${USER_NDK_PATH} | tee -a local.properties
+
+# Make .env file and store env vars there.
+touch local.env
+echo USER_SDK_PATH=${USER_SDK_PATH} | tee -a local.env
+echo USER_NDK_PATH=${USER_NDK_PATH} | tee -a local.env
+echo USER_KEYTOOL_PATH=${USER_KEYTOOL_PATH} | tee -a local.env
 
 # gradle.properties variables (keystore)
 RELEASE_STORE_FILE=/home/pinzani/Documents/git_projects/LibreraReader/keystore.pkcs12
