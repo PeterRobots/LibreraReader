@@ -119,8 +119,9 @@ cd ..
 ## Building for F-Droid for Android
 
 If you wish to build for F-Droid (e.g. not using google services, Internet).
+You can build with fdroid from source or if you wish to assemble it without see below.
 
-There is a few steps:
+Assembling fdroid version:
 1) Configure setup_local.sh with your specific user parameters.
     - Keystore alias, password and path of the keystore file (where you intend to make it), in format shown above.
     - By default the script puts the keystore in the project directory
