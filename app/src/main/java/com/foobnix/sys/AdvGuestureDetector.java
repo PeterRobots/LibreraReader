@@ -339,6 +339,9 @@ public class AdvGuestureDetector extends SimpleOnGestureListener implements IMul
     @Override
     public void onLongPress(final MotionEvent e) {
         LOG.d("ADV-onLongPress");
+        if (!AppState.get().isAllowTextSelection) {
+            return;
+        }
         if(AppState.get().isCropNotification) {
             Vibro.vibrate();
         }
