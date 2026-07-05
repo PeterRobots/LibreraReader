@@ -2,6 +2,11 @@
 USER_SDK_PATH=/home/pinzani/Android/Sdk
 USER_NDK_PATH=/home/pinzani/Android/Sdk/ndk
 USER_KEYTOOL_PATH=~/.local/share/JetBrains/Toolbox/apps/android-studio/jbr/bin/keytool
+# gradle.properties variables (keystore)
+RELEASE_STORE_FILE=/home/pinzani/Documents/git_projects/LibreraReader/keystore.pkcs12
+RELEASE_STORE_PASSWORD=tiptoe
+RELEASE_KEY_PASSWORD=tiptoe
+RELEASE_KEY_ALIAS=PeterRobots
 
 # transfer local.properties
 sed -i -E "s#(sdk.dir=).*#\1${USER_SDK_PATH}#g" local.properties
@@ -12,14 +17,16 @@ echo USER_SDK_PATH=${USER_SDK_PATH} | tee -a local.env
 echo USER_NDK_PATH=${USER_NDK_PATH} | tee -a local.env
 echo USER_KEYTOOL_PATH=${USER_KEYTOOL_PATH} | tee -a local.env
 
-# gradle.properties variables (keystore)
-RELEASE_STORE_FILE=/home/pinzani/Documents/git_projects/LibreraReader/keystore.pkcs12
-RELEASE_STORE_PASSWORD=tiptoe
-RELEASE_KEY_PASSWORD=tiptoe
-RELEASE_KEY_ALIAS=PeterRobots
-
 # generate keystore with keytool
 ${USER_KEYTOOL_PATH} -genkeypair -v -storetype PKCS12 -keystore keystore.pkcs12 -alias ${RELEASE_KEY_ALIAS} -storepass ${RELEASE_STORE_PASSWORD} -keypass ${RELEASE_KEY_PASSWORD} -keyalg RSA -keysize 2048 -validity 10000
+
+# Remove folders and files that aren't needed: https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/com.foobnix.pro.pdf.reader.yml#L1921
+rm -rf Builder/src/libs
+rm -f Builder/librara-chrome-extension.zip
+rm -rf composeApp
+rm -rf iosApp
+rm -rf libDepFree
+rm -rf libDepPro
 
 # populate gradle keystore properties
 cat > .gradle/gradle.properties << EOL
