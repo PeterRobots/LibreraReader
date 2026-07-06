@@ -118,13 +118,29 @@ cd ..
 
 ## Building for F-Droid for Android
 
-If you wish to build for F-Droid (e.g. not using google services, Internet) you can run the build with
+If you wish to build for F-Droid (e.g. not using google services, Internet).
+You can build with fdroid from source or if you wish to assemble it without see below.
 
+Assembling fdroid version:
+1) Configure setup_local.sh with your specific user parameters.
+    - Keystore alias, password and path of the keystore file (where you intend to make it), in format shown above.
+    - By default the script puts the keystore in the project directory
+    - Your paths to ndk, sdk and keytool
+    - mupdf version you intend to use
+2) run assemble_fdroid.sh
+    - Puts your keystore variable in `.gradle/gradle.properties`
+    - Puts user paths into `local.env`
+    - Updates sdk path in `local.properties`
+    - Makes a keystore in the project directory
+    - Prebuild steps from the gitlab procedure for LibreraReader.
+        - Removes libdeps of free and pro, and removes mentions from gradle
+        - Replaces sdk paths with yours (double check PATH1 and PATH2)
+        - Premakes the jni folder
+    - Git clone the mupdf repo and link it to app
+    - Assembles with gradle
+        - Sync gradle with android studio if the app doesn't show in android studio.
 ~~~~
-cd Builder
-./link_to_mupdf_x.x.x.sh
-cd ..
-./gradlew assembleFdroid
+./assemble_fdroid.sh
 ~~~~
 
 F-Droid build does also not need a **google-services.json**
